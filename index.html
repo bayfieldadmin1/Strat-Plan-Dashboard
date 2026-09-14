@@ -181,6 +181,11 @@ tbody tr:nth-child(even){background:#fffcf3}
 .overview-heading{display:flex;align-items:center;gap:14px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
 html{overscroll-behavior-y:contain}
 .embed-intro h2{font-size:28px;line-height:1.2;color:var(--purple-dark);margin:0 0 8px}
+.view-tab[data-view="1"]{--tab-accent:var(--purple);--tab-ink:#fff}
+.view-tab[data-view="2"]{--tab-accent:var(--gold);--tab-ink:#111}
+.view-tab[data-view="3"]{--tab-accent:#78b9c0;--tab-ink:#111}
+.view-tab:not([data-view="overview"]){border-bottom-color:var(--tab-accent)}
+.view-tab:not([data-view="overview"])[aria-selected="true"]{background:var(--tab-accent);color:var(--tab-ink);border-color:var(--tab-accent);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
 .overview-heading:after{content:"";height:1px;background:var(--line);flex:1}
 .overview-copy{font-size:15px;margin-bottom:18px}
 .measure{grid-template-columns:minmax(0,1fr) 238px}
