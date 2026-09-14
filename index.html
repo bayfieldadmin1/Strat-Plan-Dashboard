@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Strategic Plan Scorecard Embed V9 | Bayfield School District</title>
+<title>Strategic Plan Scorecard • Phase 2 | Bayfield School District</title>
 <style>
 /*
   Bayfield School District Strategic Plan Scorecard - iframe-native embed
@@ -156,22 +156,67 @@ tbody tr:nth-child(even){background:#fffcf3}
 @media print{
   .tools,.focus-nav,.notice{display:none}.scorecard{max-width:none}.focus-card,.measure{break-inside:avoid}.table-wrap{display:none}
 }
+
+/* Phase 2: preserve the original palette and embedded plan artwork. */
+[hidden]{display:none!important}
+.scorecard{padding:24px 16px 30px}
+:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+.view-tabs{display:grid;grid-template-columns:.7fr repeat(3,1fr);gap:6px;margin:22px 0}
+.view-tab{border:1px solid var(--line);border-bottom:4px solid var(--line);background:#fff;padding:13px 10px;color:var(--purple-dark);font-weight:700;font-size:14px}
+.view-tab[aria-selected="true"]{background:var(--purple);color:white;border-color:var(--purple);border-bottom-color:var(--gold)}
+.priority-map{margin:0;padding:20px}.focus-card{min-height:310px}.focus-card .mini-count{background:var(--purple);color:#fff;padding:8px 11px;border:0;align-self:flex-start}
+.overview-heading{font-size:26px;color:var(--purple-dark);margin:0 0 8px}.overview-copy{margin:0 0 22px;color:var(--muted)}
+.focus-section{margin:0}.tools{position:static;margin:20px 0}.focus-head{margin-top:0}
+.annual-focus{border:1px solid #eadfbf;border-top:5px solid var(--gold);background:var(--soft-gold);padding:18px;margin-bottom:24px}
+.annual-focus h3{color:var(--purple-dark);margin:0 0 5px;font-size:23px}.annual-focus>p{margin:0 0 16px;color:#555}
+.annual-focus .priority{margin-bottom:12px}.annual-focus .priority:last-child{margin-bottom:0}
+.year-tag{display:inline-block;background:var(--soft-gold);color:var(--purple-dark);border:1px solid #eadfbf;padding:3px 8px;margin-bottom:8px;font-size:13px;font-weight:bold}
+.accomplishments{border-left:5px solid var(--gold);background:var(--soft-purple);padding:20px;margin-bottom:20px}.accomplishments h3{margin:0 0 8px;color:var(--purple-dark)}
+.accomplishments p{margin:0 0 12px}.accomplishments a{color:var(--purple);font-weight:bold}
+.detail-heading{font-size:24px;color:var(--purple-dark);margin:0 0 8px}.table-wrap{margin-top:24px}.closeout{margin-top:24px}
+@media(max-width:820px){.focus-grid{grid-template-columns:repeat(3,1fr)}.focus-card{padding:12px;min-height:0}.focus-card h3{font-size:18px}.focus-bullets{font-size:14px}}
+@media(max-width:640px){.focus-grid{grid-template-columns:1fr}.view-tabs{grid-template-columns:1fr 1fr}.focus-card .card-top{margin-bottom:4px}.focus-card h3{font-size:21px}.scorecard{padding:16px 10px}.annual-focus{padding:12px}.focus-card .mini-count{margin-top:10px}.view-tab{min-height:56px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.focus-card{transition:none}}
+
+.overview-heading{display:flex;align-items:center;gap:14px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+html{overscroll-behavior-y:contain}
+.overview-heading:after{content:"";height:1px;background:var(--line);flex:1}
+.overview-copy{font-size:15px;margin-bottom:18px}
+.measure{grid-template-columns:minmax(0,1fr) 238px}
+.priority-title{grid-template-columns:auto minmax(0,1fr)}
+#detail-heading{position:sticky;top:0;z-index:10;background:#fff;padding:6px 0;margin-bottom:16px}
+#detail-heading .focus-head{grid-template-columns:36px minmax(0,1fr);align-items:center;gap:10px;padding:10px 14px;margin:0;box-shadow:0 3px 8px rgba(66,20,95,.07)}
+#detail-heading .focus-mark{width:36px;height:36px}
+#detail-heading .label{font-size:11px;letter-spacing:.08em;margin-bottom:2px}
+#detail-heading h2{font-size:18px;line-height:1.3;margin:0}
+.priority,.table-wrap{scroll-margin-top:110px}
+@media(max-width:820px){.measure{grid-template-columns:minmax(0,1fr)}.measure-data{grid-column:auto}}
+@media(max-width:520px){#detail-heading .focus-head{padding:8px 10px}#detail-heading h2{font-size:16px}.priority,.table-wrap{scroll-margin-top:130px}}
+@media print{#detail-heading{position:static}}
 </style>
 </head>
 <body>
 <main class="scorecard" id="scorecard">
   <section class="embed-intro" aria-label="About this scorecard">
-    <p class="lead">Tracking the district's progress on the 2026&ndash;2031 Strategic Plan, organized by the three focus areas we prioritize.</p>
+    <p class="lead">Tracking the district's progress on the 2026&ndash;2031 Strategic Plan, organized by the three focus areas it prioritizes.</p>
     <p class="update-line" id="updated">Loading scorecard data&hellip;</p>
   </section>
 
   <div id="status-banner"></div>
 
+  <nav class="view-tabs" role="tablist" aria-label="Strategic plan focus areas" id="view-tabs"></nav>
+  <section id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+  <div id="accomplishments"></div>
   <section class="priority-map" aria-labelledby="priority-map-title">
-    <div class="section-title"><span id="priority-map-title">What we are prioritizing</span></div>
+    <h2 class="overview-heading" id="priority-map-title">What we are prioritizing</h2><p class="overview-copy">Choose a focus area to see this year’s priorities and our progress toward 2031.</p>
     <div class="focus-grid" id="focus-overview"></div>
   </section>
 
+  </section>
+  <section id="panel-detail" role="tabpanel" tabindex="0" hidden>
+  <div id="detail-heading"></div>
+  <div id="annual-focus"></div>
+  <h3 class="detail-heading">All measures in this focus area</h3>
   <section class="tools" aria-label="Filter measures by status">
     <p class="tools-label">Filter by status</p>
     <div class="status-tabs" id="status-tabs" role="group" aria-label="Filter by status"></div>
@@ -181,7 +226,7 @@ tbody tr:nth-child(even){background:#fffcf3}
     </div>
   </section>
 
-  <ul class="focus-nav" id="focus-nav" aria-label="Jump to focus area"></ul>
+
   <div id="content" aria-live="polite"></div>
 
   <details class="table-wrap" id="data-table">
@@ -189,23 +234,22 @@ tbody tr:nth-child(even){background:#fffcf3}
     <div class="table-scroll">
       <table>
         <caption class="visually-hidden">Strategic plan measures with current value, target, status, owner, source, and last updated date</caption>
-        <thead><tr><th>Focus Area</th><th>Priority</th><th>Goal</th><th>Measure</th><th>Current</th><th>Target</th><th>Status</th><th>Owner</th><th>Source</th><th>Updated</th></tr></thead>
+        <thead><tr><th>Focus Area</th><th>Priority</th><th>Annual Focus</th><th>Goal</th><th>Measure</th><th>Current</th><th>Target</th><th>Status</th><th>Owner</th><th>Source</th><th>Updated</th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
   </details>
 
+  </section>
   <p class="closeout">Measures are updated as new results become available. Each item lists an owner and data source so families and community members can see both the priority and the evidence behind it.</p>
 </main>
 
 <script>
-/* DEPLOYMENT NOTE (Edlio):
-   Edlio strips <script> from page content, so the auto-height postMessage below
-   does NOT work when embedded in Edlio. On Edlio, host this file externally and
-   insert it with a FIXED-HEIGHT <iframe> (internal scroll). The postHeight code
-   is harmless and only auto-sizes if you ever host on a page you control that
-   adds the matching parent listener. */
-const SHEET_CSV_URL = "";
+/* Edlio: host this single file externally in a fixed-height iframe with internal scroll. */
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTkpwhlXOCwq9K_vYjSD7GUuwm3Jv4bN40a2i8qYwbEqqbwVd7EvsLfT1sQMr4uauZ60K5qEmdYrmSk/pub?gid=1431423108&single=true&output=csv";
+// Optional published Settings tab CSV (Key,Value). Without it, these defaults apply.
+const SETTINGS_CSV_URL = "";
+const SETTINGS = {"Focus Year":"1","Show Accomplishments":"No","Accomplishment Title":"See what we accomplished in Year 1","Accomplishment Text":"","Accomplishment URL":""};
 
 const STATUS = {
   "On Track": {css:"--on-track", cls:"on"},
@@ -259,20 +303,208 @@ function focusIcon(name){
 }
 
 const SAMPLE = [
- {"Focus Area":"Connected Learning for Lifelong Success","Priority":"Standards, Instruction & Assessment","Goal":"Every school meets or exceeds Performing on the School Performance Framework by 2031","Measure":"Schools rated Performing or above on the SPF","Current":"2 of 4","Target":"4 of 4 schools","Status":"At Risk","Owner":"Academics / Assessment","Source":"CDE School Performance Framework","Last Updated":"Aug 2026","Note":"Two schools at Performing; two on Improvement plans with growth targets set."},
- {"Focus Area":"Connected Learning for Lifelong Success","Priority":"Standards, Instruction & Assessment","Goal":"100% of schools meet or exceed state or national proficiency averages by 2031","Measure":"Schools at/above average proficiency (DIBELS, NWEA, CMAS, PSAT/SAT)","Current":"3 of 4","Target":"4 of 4 schools","Status":"On Track","Owner":"Academics / Assessment","Source":"CDE / NWEA / district assessment","Last Updated":"Aug 2026","Note":""},
- {"Focus Area":"Connected Learning for Lifelong Success","Priority":"Authentic & Connected Learning","Goal":"Each grade level and content area offers at least one real-world learning experience by 2031","Measure":"% of grade levels / content areas with 1+ experience","Current":"-","Target":"100%","Status":"Not Started","Owner":"Curriculum & Instruction","Source":"Curriculum & Instruction","Last Updated":"-","Note":"Pilot scheduled for Year 2."},
- {"Focus Area":"Connected Learning for Lifelong Success","Priority":"Supported Staff & Educators","Goal":"Educators rate professional learning 4.0+ for improving instruction by 2031","Measure":"Educator survey score: PD improves instruction","Current":"Baseline","Target":"4.0 / 5.0 or higher","Status":"Baseline Year","Owner":"Academics / Assessment","Source":"Annual staff survey","Last Updated":"May 2026","Note":"New survey question; baseline established spring 2026."},
- {"Focus Area":"Big Dreams for Hopeful Futures","Priority":"Career-Connected Learning","Goal":"100% of graduates earn a credential, 12 college credits, or a work-based learning experience","Measure":"% of graduates meeting 1+ pathway","Current":"68%","Target":"100%","Status":"On Track","Owner":"Counseling","Source":"PowerSchool / Counseling","Last Updated":"Jun 2026","Note":""},
- {"Focus Area":"Big Dreams for Hopeful Futures","Priority":"Authentic Demonstration of Learning","Goal":"100% of students present a demonstration of learning at grades 2, 5, 8, and 12","Measure":"% of transition-year students presenting","Current":"-","Target":"100%","Status":"Not Started","Owner":"Curriculum & Instruction","Source":"Curriculum & Instruction","Last Updated":"-","Note":""},
- {"Focus Area":"Big Dreams for Hopeful Futures","Priority":"Planning & Support for Hopeful Futures","Goal":"100% of middle and high school students have an ICAP meeting all 8 quality indicators","Measure":"% of MS/HS students with a complete ICAP","Current":"41%","Target":"100%","Status":"At Risk","Owner":"Counseling","Source":"Counseling / ICAP platform","Last Updated":"Jun 2026","Note":"Audit found gaps in financial-literacy and employability-skills criteria."},
- {"Focus Area":"Optimizing Systems for Service Excellence","Priority":"Sustainable Fiscal Management & Transparency","Goal":"Responsible fiscal management evidenced by clean annual audits and positive board feedback","Measure":"Annual financial audit result","Current":"Clean","Target":"Clean audit","Status":"On Track","Owner":"Finance","Source":"External audit / Finance","Last Updated":"Dec 2025","Note":"FY25 audit unmodified, no findings."},
- {"Focus Area":"Optimizing Systems for Service Excellence","Priority":"Communication","Goal":"Increase the share of families who feel informed each year, with sustained growth by 2031","Measure":"% of families reporting they feel informed","Current":"Baseline","Target":"Growth vs. baseline","Status":"Baseline Year","Owner":"Communications","Source":"Annual family survey","Last Updated":"May 2026","Note":""},
- {"Focus Area":"Optimizing Systems for Service Excellence","Priority":"Family Partnership","Goal":"Establish a family-partnership baseline in 2026-27 and set an improvement target for 2031","Measure":"% agreeing school communication equips them to support learning","Current":"Baseline","Target":"Baseline set 2026-27","Status":"Baseline Year","Owner":"Communications","Source":"Annual family survey","Last Updated":"-","Note":"Survey administers fall 2026."},
- {"Focus Area":"Optimizing Systems for Service Excellence","Priority":"Effective Operations","Goal":"Every department meets 90%+ of its annual KPIs by 2031 (KPIs defined by June 2027)","Measure":"% of departments meeting 90%+ of KPIs","Current":"-","Target":"100% of departments","Status":"Not Started","Owner":"Each department","Source":"Department KPI reports","Last Updated":"-","Note":"KPIs to be defined by June 2027."}
+ {
+  "Focus Area": "Connected Learning for Lifelong Success",
+  "Priority": "Standards, Instruction & Assessment",
+  "Goal": "Every school meets or exceeds Performing on the School Performance Framework by 2031",
+  "Measure": "Schools rated Performing or above on the SPF",
+  "Current": "2 of 4",
+  "Target": "4 of 4 schools",
+  "Status": "At Risk",
+  "Owner": "Academics / Assessment",
+  "Source": "CDE School Performance Framework",
+  "Last Updated": "Aug 2026",
+  "Note": "Two schools at Performing; two on Improvement plans with growth targets set.",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Connected Learning for Lifelong Success",
+  "Priority": "Standards, Instruction & Assessment",
+  "Goal": "100% of schools meet or exceed state or national proficiency averages by 2031",
+  "Measure": "Schools at/above average proficiency (DIBELS, NWEA, CMAS, PSAT/SAT)",
+  "Current": "3 of 4",
+  "Target": "4 of 4 schools",
+  "Status": "On Track",
+  "Owner": "Academics / Assessment",
+  "Source": "CDE / NWEA / district assessment",
+  "Last Updated": "Aug 2026",
+  "Note": "",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Connected Learning for Lifelong Success",
+  "Priority": "Authentic & Connected Learning",
+  "Goal": "Each grade level and content area offers at least one real-world learning experience by 2031",
+  "Measure": "% of grade levels / content areas with 1+ experience",
+  "Current": "-",
+  "Target": "100%",
+  "Status": "Not Started",
+  "Owner": "Curriculum & Instruction",
+  "Source": "Curriculum & Instruction",
+  "Last Updated": "-",
+  "Note": "",
+  "Year 1 Focus": "Yes",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Connected Learning for Lifelong Success",
+  "Priority": "Supported Staff & Educators",
+  "Goal": "Educators rate professional learning 4.0+ for improving instruction by 2031",
+  "Measure": "Educator survey score: PD improves instruction",
+  "Current": "Baseline",
+  "Target": "4.0 / 5.0 or higher",
+  "Status": "Baseline Year",
+  "Owner": "Academics / Assessment",
+  "Source": "Annual staff survey",
+  "Last Updated": "May 2026",
+  "Note": "New survey question; baseline established spring 2026.",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Big Dreams for Hopeful Futures",
+  "Priority": "Career-Connected Learning",
+  "Goal": "100% of graduates earn a credential, 12 college credits, or a work-based learning experience",
+  "Measure": "% of graduates meeting 1+ pathway",
+  "Current": "68%",
+  "Target": "100%",
+  "Status": "On Track",
+  "Owner": "Counseling",
+  "Source": "PowerSchool / Counseling",
+  "Last Updated": "Jun 2026",
+  "Note": "",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Big Dreams for Hopeful Futures",
+  "Priority": "Authentic Demonstration of Learning",
+  "Goal": "100% of students present a demonstration of learning at grades 2, 5, 8, and 12",
+  "Measure": "% of transition-year students presenting",
+  "Current": "-",
+  "Target": "100%",
+  "Status": "Not Started",
+  "Owner": "Curriculum & Instruction",
+  "Source": "Curriculum & Instruction",
+  "Last Updated": "-",
+  "Note": "",
+  "Year 1 Focus": "Yes",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Big Dreams for Hopeful Futures",
+  "Priority": "Planning & Support for Hopeful Futures",
+  "Goal": "100% of middle and high school students have an ICAP meeting all 8 quality indicators",
+  "Measure": "% of MS/HS students with a complete ICAP",
+  "Current": "41%",
+  "Target": "100%",
+  "Status": "At Risk",
+  "Owner": "Counseling",
+  "Source": "Counseling / ICAP platform",
+  "Last Updated": "Jun 2026",
+  "Note": "Audit found gaps in financial-literacy and employability-skills criteria.",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Optimizing Systems for Service Excellence",
+  "Priority": "Sustainable Fiscal Management & Transparency",
+  "Goal": "Responsible fiscal management evidenced by clean annual audits and positive board feedback",
+  "Measure": "Annual financial audit result",
+  "Current": "Clean",
+  "Target": "Clean audit",
+  "Status": "On Track",
+  "Owner": "Finance",
+  "Source": "External audit / Finance",
+  "Last Updated": "Dec 2025",
+  "Note": "FY25 audit unmodified, no findings.",
+  "Year 1 Focus": "Yes",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Optimizing Systems for Service Excellence",
+  "Priority": "Communication",
+  "Goal": "Increase the share of families who feel informed each year, with sustained growth by 2031",
+  "Measure": "% of families reporting they feel informed",
+  "Current": "Baseline",
+  "Target": "Growth vs. baseline",
+  "Status": "Baseline Year",
+  "Owner": "Communications",
+  "Source": "Annual family survey",
+  "Last Updated": "May 2026",
+  "Note": "",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Optimizing Systems for Service Excellence",
+  "Priority": "Family Partnership",
+  "Goal": "Establish a family-partnership baseline in 2026-27 and set an improvement target for 2031",
+  "Measure": "% agreeing school communication equips them to support learning",
+  "Current": "Baseline",
+  "Target": "Baseline set 2026-27",
+  "Status": "Baseline Year",
+  "Owner": "Communications",
+  "Source": "Annual family survey",
+  "Last Updated": "-",
+  "Note": "Survey administers fall 2026.",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ },
+ {
+  "Focus Area": "Optimizing Systems for Service Excellence",
+  "Priority": "Effective Operations",
+  "Goal": "Every department meets 90%+ of its annual KPIs by 2031 (KPIs defined by June 2027)",
+  "Measure": "% of departments meeting 90%+ of KPIs",
+  "Current": "-",
+  "Target": "100% of departments",
+  "Status": "Not Started",
+  "Owner": "Each department",
+  "Source": "Department KPI reports",
+  "Last Updated": "-",
+  "Note": "KPIs to be defined by June 2027.",
+  "Year 1 Focus": "No",
+  "Year 2 Focus": "No",
+  "Year 3 Focus": "No",
+  "Year 4 Focus": "No",
+  "Year 5 Focus": "No"
+ }
 ];
 let allData=[];
 let activeStatus="";
+let activeView="overview";
 
 function esc(s){return String(s==null?"":s).replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));}
 function val(s){s=String(s==null?"":s).trim();return s===""?"-":s;}
@@ -303,24 +535,43 @@ function groupData(data){
   return byFocus;
 }
 function currentFiltered(){
-  return allData.filter(d=>(!activeStatus||statusOf(d["Status"])===activeStatus));
+  return focusData().filter(d=>(!activeStatus||statusOf(d["Status"])===activeStatus));
 }
+
+function focusYear(){return /^[1-5]$/.test(String(SETTINGS["Focus Year"]))?Number(SETTINGS["Focus Year"]):1;}
+function isFocus(d){return String(d["Year "+focusYear()+" Focus"]||"").trim().toLowerCase()==="yes";}
+function focusData(){return allData.filter(d=>d["Focus Area"]===FOCUS_ORDER[Number(activeView)-1]);}
 function renderAll(){
-  const data=currentFiltered();
-  renderOverview(allData);
-  renderStatusTabs(allData);
-  renderActiveSummary(data);
-  renderFocusNav(data);
-  renderContent(data);
-  renderTable(data);
-  postHeight();
+  const data=currentFiltered(),overview=activeView==="overview";
+  document.getElementById("panel-overview").hidden=!overview;
+  document.getElementById("panel-detail").hidden=overview;
+  document.getElementById("panel-detail").setAttribute("aria-labelledby","tab-"+activeView);
+  document.querySelectorAll(".view-tab").forEach(t=>{const selected=t.dataset.view===activeView;t.setAttribute("aria-selected",selected);t.tabIndex=selected?0:-1;});
+  renderOverview();renderAccomplishments();
+  if(overview)return;
+  const f=FOCUS_ORDER[Number(activeView)-1];
+  const heading=document.getElementById("detail-heading");
+  if(heading.dataset.focus!==activeView){heading.dataset.focus=activeView;heading.innerHTML='<div class="focus-head">'+focusIcon(f)+'<div><span class="label">Focus Area '+activeView+'</span><h2 class="detail-heading">'+esc(f)+'</h2></div></div>';} 
+  const priorities=focusData().filter(isFocus);
+  document.getElementById("annual-focus").innerHTML='<section class="annual-focus"><h3>Year '+focusYear()+' focus · '+(2025+focusYear())+'–'+(2026+focusYear())+'</h3><p>Our emphasis this year within the 2026–2031 plan.</p>'+ (priorities.length?priorities.map(d=>'<div class="priority"><div class="priority-title"><h4>'+esc(d.Priority)+'</h4></div>'+renderMeasure(d,1)+'</div>').join(''):'<p>Annual focus priorities have not yet been published.</p>')+'</section>';
+  renderStatusTabs(focusData());renderActiveSummary(data);renderContent(data);renderTable(data);
 }
-function renderOverview(data){
-  const counts={};data.forEach(d=>{const f=d["Focus Area"]||"Other";counts[f]=(counts[f]||0)+1;});
-  const focuses=Object.keys(counts).sort(focusSort);
-  document.getElementById("focus-overview").innerHTML=focuses.map((f,i)=>`<a class="focus-card" href="#${slug(f)}">
-    <div class="card-top"><div class="num">Focus Area ${i+1}</div>${focusIcon(f)}</div><h3>${esc(f)}</h3>${focusBullets(f)}<span class="mini-count">${counts[f]} measure${counts[f]===1?"":"s"}</span>
-  </a>`).join("");
+function renderOverview(){
+  document.getElementById("focus-overview").innerHTML=FOCUS_ORDER.map((f,i)=>'<a class="focus-card" href="#detail/focus-'+(i+1)+'"><div class="card-top"><div class="num">Focus Area '+(i+1)+'</div>'+focusIcon(f)+'</div><h3>'+esc(f)+'</h3>'+focusBullets(f)+'<span class="mini-count">Explore focus area <span aria-hidden="true">→</span></span></a>').join('');
+}
+function renderAccomplishments(){
+  const el=document.getElementById('accomplishments');
+  el.hidden=String(SETTINGS['Show Accomplishments']).toLowerCase()!=='yes';
+  const url=String(SETTINGS['Accomplishment URL']||'').trim();
+  el.innerHTML=el.hidden?'':'<section class="accomplishments"><h3>'+esc(SETTINGS['Accomplishment Title'])+'</h3><p>'+esc(SETTINGS['Accomplishment Text'])+'</p>'+(/^https:\/\//i.test(url)?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Explore our accomplishments →</a>':'')+'</section>';
+}
+function readRoute(){
+  const match=location.hash.match(/^#detail\/focus-([123])$/);
+  const next=match?match[1]:(location.hash==='#overview'||!location.hash?'overview':activeView);
+  const changed=next!==activeView;
+  if(changed){activeView=next;activeStatus='';document.getElementById('data-table').open=false;}
+  renderAll();
+  if(changed){document.getElementById('tab-'+activeView)?.focus({preventScroll:true});window.scrollTo({top:0,left:0,behavior:'instant'});}
 }
 function renderStatusTabs(data){
   const counts={};STATUS_ORDER.forEach(s=>counts[s]=0);data.forEach(d=>counts[statusOf(d["Status"])]++);
@@ -330,16 +581,12 @@ function renderStatusTabs(data){
 function renderActiveSummary(data){
   const clearBtn=document.getElementById("clear-filters");
   if(activeStatus){
-    document.getElementById("active-summary").textContent=`Showing ${data.length} of ${allData.length} measures \u2014 ${activeStatus}`;
+    document.getElementById("active-summary").textContent=`Showing ${data.length} of ${focusData().length} measures \u2014 ${activeStatus}`;
     clearBtn.hidden=false;
   }else{
-    document.getElementById("active-summary").textContent=`${allData.length} measure${allData.length===1?"":"s"} across three focus areas`;
+    document.getElementById("active-summary").textContent="Showing all statuses";
     clearBtn.hidden=true;
   }
-}
-function renderFocusNav(data){
-  const focuses=Array.from(new Set(data.map(d=>d["Focus Area"]||"Other"))).sort(focusSort);
-  document.getElementById("focus-nav").innerHTML=focuses.map(f=>`<li><a href="#${slug(f)}">${esc(f)}</a></li>`).join("");
 }
 function renderContent(data){
   const content=document.getElementById("content");
@@ -349,16 +596,16 @@ function renderContent(data){
     const priorities=Object.keys(byFocus[f]);
     const count=Object.values(byFocus[f]).flat().length;
     const focusNumber=FOCUS_ORDER.indexOf(f)>=0?FOCUS_ORDER.indexOf(f)+1:fi+1;
-    return `<section class="focus-section" id="${slug(f)}"><div class="focus-head">${focusIcon(f)}<div class="focus-copy"><span class="label">Focus Area ${focusNumber}</span><h3>${esc(f)}</h3><p>${focusSummary(f)?"Priorities: "+esc(focusSummary(f))+" ":""}${count} measure${count===1?"":"s"} shown.</p><ul class="priority-jump">${priorities.map(p=>`<li><a href="#${slug(f+" "+p)}">${esc(p)}</a></li>`).join("")}</ul></div></div>
-    ${priorities.map(p=>`<div class="priority" id="${slug(f+" "+p)}"><div class="priority-title"><h4>${esc(p)}</h4><span class="measure-total">${byFocus[f][p].length} measure${byFocus[f][p].length===1?"":"s"}</span></div><div class="measure-list">${byFocus[f][p].map((d,i)=>renderMeasure(d,i+1)).join("")}</div></div>`).join("")}</section>`;
+    return `<section class="focus-section" id="${slug(f)}">
+    ${priorities.map(p=>`<div class="priority" id="${slug(f+" "+p)}"><div class="priority-title"><h4>${esc(p)}</h4></div><div class="measure-list">${byFocus[f][p].map((d,i)=>renderMeasure(d,i+1)).join("")}</div></div>`).join("")}</section>`;
   }).join("");
 }
 function renderMeasure(d,index){
   const st=statusOf(d["Status"]),cfg=STATUS[st],note=val(d["Note"]);
-  return `<article class="measure" style="--status:var(${cfg.css})"><div class="measure-num" aria-hidden="true">${index}</div><div class="measure-main"><span class="goal-label">Goal</span><h5>${esc(d["Goal"])}</h5><div class="measure-copy"><span class="measure-label">How progress is measured</span><p>${esc(d["Measure"])}</p></div>${note!=="-"?`<p class="measure-note">${esc(note)}</p>`:""}</div><aside class="measure-data" aria-label="Measure details"><div class="status ${cfg.cls}" style="--status:var(${cfg.css})"><span class="shape" aria-hidden="true"></span>${esc(st)}</div><dl class="kv"><div><dt>Current</dt><dd>${esc(val(d["Current"]))}</dd></div><div><dt>Target</dt><dd>${esc(val(d["Target"]))}</dd></div><div><dt>Owner</dt><dd>${esc(val(d["Owner"]))}</dd></div></dl><div class="source"><b>Source:</b> ${esc(val(d["Source"]))}<br><b>Updated:</b> ${esc(val(d["Last Updated"]))}</div></aside></article>`;
+  return `<article class="measure" style="--status:var(${cfg.css})"><div class="measure-main">${isFocus(d)?`<span class="year-tag">Year ${focusYear()} focus</span>`:""}<span class="goal-label">Goal</span><h5>${esc(d["Goal"])}</h5><div class="measure-copy"><span class="measure-label">How progress is measured</span><p>${esc(d["Measure"])}</p></div>${note!=="-"?`<p class="measure-note">${esc(note)}</p>`:""}</div><aside class="measure-data" aria-label="Measure details"><div class="status ${cfg.cls}" style="--status:var(${cfg.css})"><span class="shape" aria-hidden="true"></span>${esc(st)}</div><dl class="kv"><div><dt>Current</dt><dd>${esc(val(d["Current"]))}</dd></div><div><dt>Target</dt><dd>${esc(val(d["Target"]))}</dd></div><div><dt>Owner</dt><dd>${esc(val(d["Owner"]))}</dd></div></dl><div class="source"><b>Source:</b> ${esc(val(d["Source"]))}<br><b>Updated:</b> ${esc(val(d["Last Updated"]))}</div></aside></article>`;
 }
 function renderTable(data){
-  document.getElementById("tbody").innerHTML=data.map(d=>`<tr><td>${esc(d["Focus Area"])}</td><td>${esc(d["Priority"])}</td><td>${esc(d["Goal"])}</td><td>${esc(d["Measure"])}</td><td>${esc(val(d["Current"]))}</td><td>${esc(val(d["Target"]))}</td><td>${esc(statusOf(d["Status"]))}</td><td>${esc(val(d["Owner"]))}</td><td>${esc(val(d["Source"]))}</td><td>${esc(val(d["Last Updated"]))}</td></tr>`).join("");
+  document.getElementById("tbody").innerHTML=data.map(d=>`<tr><td>${esc(d["Focus Area"])}</td><td>${esc(d["Priority"])}</td><td>${isFocus(d)?"Year "+focusYear():"—"}</td><td>${esc(d["Goal"])}</td><td>${esc(d["Measure"])}</td><td>${esc(val(d["Current"]))}</td><td>${esc(val(d["Target"]))}</td><td>${esc(statusOf(d["Status"]))}</td><td>${esc(val(d["Owner"]))}</td><td>${esc(val(d["Source"]))}</td><td>${esc(val(d["Last Updated"]))}</td></tr>`).join("");
 }
 function parseWhen(s){
   s=String(s||"").trim(); if(!s||s==="-") return null;
@@ -379,32 +626,39 @@ function updateLatest(data){
 function banner(type,msg){document.getElementById("status-banner").innerHTML=`<div class="notice ${type||""}">${esc(msg)}</div>`;}
 function bindEvents(){
   document.getElementById("status-tabs").addEventListener("click",e=>{
-    const btn=e.target.closest("button[data-status]");if(!btn)return;activeStatus=btn.dataset.status;renderAll();
+    const btn=e.target.closest("button[data-status]");if(!btn)return;activeStatus=btn.dataset.status;renderAll();document.querySelectorAll("[data-status]").forEach(t=>{if(t.dataset.status===activeStatus)t.focus();});
   });
   document.getElementById("clear-filters").addEventListener("click",()=>{activeStatus="";renderAll();});
 }
-function postHeight(){
-  const h=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
-  try{window.parent.postMessage({type:"bayfieldScorecardHeight",height:h},"*");}catch(e){}
-}
-function setupResize(){
-  if("ResizeObserver" in window){new ResizeObserver(postHeight).observe(document.body);}else{setInterval(postHeight,500);}
-  window.addEventListener("load",postHeight);window.addEventListener("resize",postHeight);
-}
 (async function(){
-  bindEvents();setupResize();
-  if(!SHEET_CSV_URL){allData=SAMPLE;banner("","Preview mode - showing sample data. Add your published Google Sheet CSV link in the file to go live.");updateLatest(allData);renderAll();return;}
+  bindEvents();
+  const labels=['Overview',...FOCUS_ORDER];
+  document.getElementById('view-tabs').innerHTML=labels.map((label,i)=>{const v=i?String(i):'overview';return '<button type="button" role="tab" class="view-tab" id="tab-'+v+'" data-view="'+v+'" aria-controls="panel-'+(i?'detail':'overview')+'" aria-selected="'+(!i)+'" tabindex="'+(i?-1:0)+'">'+esc(label)+'</button>';}).join('');
+  document.getElementById('view-tabs').addEventListener('click',e=>{const t=e.target.closest('[data-view]');if(t){const hash=t.dataset.view==='overview'?'#overview':'#detail/focus-'+t.dataset.view;if(location.hash!==hash)history.pushState(null,'',hash);readRoute();}});
+  document.getElementById('view-tabs').addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.view-tab')],i=tabs.indexOf(document.activeElement);if(i<0)return;let n;if(e.key==='ArrowRight')n=(i+1)%4;else if(e.key==='ArrowLeft')n=(i+3)%4;else if(e.key==='Home')n=0;else if(e.key==='End')n=3;else return;e.preventDefault();tabs[n].focus();tabs[n].click();});
+  document.querySelector('a[href="#data-table"]').addEventListener('click',()=>{document.getElementById('data-table').open=true;});
+  window.addEventListener('hashchange',readRoute);
+  let settingsError='';
+  if(SETTINGS_CSV_URL){try{const res=await fetch(SETTINGS_CSV_URL,{signal:AbortSignal.timeout(12000)});if(!res.ok)throw Error('HTTP '+res.status);const rows=parseCSV(await res.text());if(rows[0]?.[0]!=='Key'||rows[0]?.[1]!=='Value')throw Error('Expected Key,Value headers');rows.slice(1).forEach(([k,v])=>{if(Object.hasOwn(SETTINGS,k))SETTINGS[k]=v;});if(!/^[1-5]$/.test(SETTINGS['Focus Year']))throw Error('Focus Year must be 1–5');}catch(e){settingsError=' Display settings could not be loaded: '+e.message;}}
+  const originalBanner=banner;banner=(type,msg)=>originalBanner(settingsError?'error':type,msg+settingsError);
+  readRoute();
+  if(!SHEET_CSV_URL){allData=SAMPLE;banner("","Preview mode - showing sample data. Add your published Google Sheet CSV link in the file to go live.");updateLatest(allData);readRoute();return;}
   try{
-    const res=await fetch(SHEET_CSV_URL,{cache:"no-store"});if(!res.ok)throw new Error("HTTP "+res.status);
+    const res=await fetch(SHEET_CSV_URL,{cache:"no-store",signal:AbortSignal.timeout(12000)});if(!res.ok)throw new Error("HTTP "+res.status);
     const text=await res.text();
     const head=(parseCSV(text)[0]||[]).map(h=>h.trim());
     const miss=REQUIRED.filter(h=>head.indexOf(h)<0);
     allData=csvToObjects(text);
     if(miss.length){
-      banner("error","These required columns are missing or renamed in the sheet: "+miss.join(", ")+". Fix the header row to match the template exactly, then republish.");
+      throw new Error("These required columns are missing or renamed in the sheet: "+miss.join(", ")+". Fix the header row to match the template exactly, then republish.");
     }else if(!allData.length){
       throw new Error("No rows found");
     }
+    const invalid=allData.find(d=>!FOCUS_ORDER.includes(d['Focus Area'])||!STATUS[d.Status]);
+    if(invalid)throw Error('A Focus Area or Status value does not match the template.');
+    const annualColumn='Year '+focusYear()+' Focus';
+    if(!head.includes(annualColumn))banner('',annualColumn+' column is missing. Annual focus priorities have not yet been published.');
+    else if(settingsError)banner('error','');
     updateLatest(allData);renderAll();
   }catch(e){
     allData=SAMPLE;banner("error","Live scorecard data is temporarily unavailable, so sample data is shown. Detail: "+e.message);updateLatest(allData);renderAll();
